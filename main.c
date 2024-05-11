@@ -1,46 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "Medicine.h"
 #include "Welcome.h"
+#include "OperateMedicine.h"
 
 int main() {
+    //带头结点的链表
+    Medicine * head = (Medicine *)malloc(sizeof(Medicine));
+    head->next = NULL;
+
+    PurchaseList * purchaseList = (PurchaseList *)malloc(sizeof(PurchaseList));
+    purchaseList->next = NULL;
+
+    SellList * sellList = (SellList *)malloc(sizeof(SellList));
+    sellList->next = NULL;
+
     while (true) {
         Welcome();
         char op = GetUserOP();
         switch (op) {
             case '1':
-
+                PurchaseMedicine(head, purchaseList);
                 break;
             case '2':
-
+                SellMedicine(head, sellList);
                 break;
             case '3':
-                printf("淇敼鑽搧鏉＄洰\n");
+                inventoryManagement(head);
                 break;
             case '4':
-                printf("鍒犻櫎鑽搧鏉＄洰\n");
-                break;
-            case '5':
-                printf("鏄剧ず杩囨湡鑽搧\n");
-                break;
-            case '6':
-                printf("鐢熸垚閿�鍞粺璁n");
-                break;
-            case '7':
-                printf("淇濆瓨鑽搧淇℃伅\n");
-                break;
-            case '8':
-                printf("娓呯悊灞忓箷\n");
+                statistics(head, purchaseList, sellList);
                 break;
             case '0':
-                printf("淇濆瓨閫�鍑虹郴缁焅n");
+                printf("保存退出系统\n");
                 break;
             default:
-                printf("杈撳叆閿欒锛岃閲嶆柊杈撳叆\n");
+                printf("输入错误，请重新输入\n");
                 break;
         }
         if (op == '0') {
             break;
         }
+        clear_input_buffer();
     }
     return 0;
 }

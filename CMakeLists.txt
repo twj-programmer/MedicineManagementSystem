@@ -6,4 +6,6 @@ set(CMAKE_C_STANDARD 23)
 add_executable(MedicineManagementSystem main.c
         Welcome.h
         Welcome.c
-        Medicine.h)
+        Medicine.h
+        OperateMedicine.h
+        OperateMedicine.c)

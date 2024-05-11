@@ -4,3 +4,5 @@ void Load();
 void Welcome();
 //获取用户操作
 char GetUserOP();
+
+void clear_input_buffer();
