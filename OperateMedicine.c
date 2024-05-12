@@ -176,7 +176,7 @@ void inventoryManagement(Medicine * head) {
     }
 }
 //
-void statistics(Medicine * head, PurchaseList * purchaseList, SellList * sellList) {
+void Statistics(Medicine * head, PurchaseList * purchaseList, SellList * sellList) {
     printf("输出统计数据\n");
     label:
     printf("选择查询的数据\n");
@@ -242,4 +242,40 @@ void statistics(Medicine * head, PurchaseList * purchaseList, SellList * sellLis
         printf("输入错误，请重新输入\n");
         goto label;
     }
+}
+//
+void Save(Medicine * head, PurchaseList * purchaseList, SellList * sellList) {
+    FILE * fHead = fopen("./Medicine.txt", "w");
+    Medicine * pHead = head -> next;
+    while (pHead != NULL) {
+        fprintf(fHead, "%s %s %s %d %s %s %s %s %d\n",
+                pHead -> name, pHead -> code,
+                pHead -> production_date, pHead -> shelf_life,
+                pHead -> entry_date, pHead -> nature, pHead -> attribute,
+                pHead -> symptoms, pHead -> quantity);
+        pHead = pHead -> next;
+    }
+    fclose(fHead);
+
+    FILE * fPurchaseList = fopen("./PurchaseList.txt", "w");
+    PurchaseList * pPurchaseList = purchaseList -> next;
+    while (pPurchaseList != NULL) {
+        fprintf(fPurchaseList, "%s %s %d\n",
+                pPurchaseList -> name, pPurchaseList -> code,
+                pPurchaseList -> quantity);
+        pPurchaseList = pPurchaseList -> next;
+    }
+    fclose(fPurchaseList);
+
+    FILE * fSellList = fopen("./SellList.txt", "w");
+    SellList * pSellList = sellList -> next;
+    while (pSellList != NULL) {
+        fprintf(fSellList, "%s %s %d\n",
+                pSellList -> name, pSellList -> code,
+                pSellList -> quantity);
+        pSellList = pSellList -> next;
+    }
+    fclose(fSellList);
+
+    printf("保存成功\n");
 }

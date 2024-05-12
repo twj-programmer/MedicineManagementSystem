@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Medicine.h"
 #include "Welcome.h"
 #include "OperateMedicine.h"
 
@@ -14,6 +13,8 @@ int main() {
 
     SellList * sellList = (SellList *)malloc(sizeof(SellList));
     sellList->next = NULL;
+
+    Load(head, purchaseList, sellList);
 
     while (true) {
         Welcome();
@@ -29,10 +30,10 @@ int main() {
                 inventoryManagement(head);
                 break;
             case '4':
-                statistics(head, purchaseList, sellList);
+                Statistics(head, purchaseList, sellList);
                 break;
             case '0':
-                printf("保存退出系统\n");
+                Save(head, purchaseList, sellList);
                 break;
             default:
                 printf("输入错误，请重新输入\n");
